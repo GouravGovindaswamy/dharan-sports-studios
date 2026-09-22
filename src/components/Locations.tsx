@@ -2,13 +2,15 @@ import { motion, useReducedMotion } from "framer-motion";
 import { CheckCircle2, MapPin } from "lucide-react";
 import { campuses } from "../data/content";
 import { SectionHeading } from "./ui/SectionHeading";
+import { Watermark } from "./ui/Watermark";
 
 export function Locations() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section id="locations" className="relative bg-app py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="locations" className="relative overflow-hidden bg-app py-24 sm:py-32">
+      <Watermark text="CAMPUS" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           index="05"
           eyebrow="Locations"
@@ -24,9 +26,10 @@ export function Locations() {
               whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.1 }}
-              className="surface group rounded-2xl p-6 transition-colors hover:border-ember-500/40 sm:p-8"
+              className="surface group relative overflow-hidden rounded-2xl p-6 transition-colors hover:border-ember-500/40 sm:p-8"
             >
-              <span className="font-label surface-pressed inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs uppercase tracking-wide text-ember-600 dark:text-ember-300">
+              <MapPin className="pointer-events-none absolute -right-4 -top-4 h-28 w-28 text-ember-500/[0.06] dark:text-ember-300/[0.07]" />
+              <span className="font-label surface-pressed relative inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs uppercase tracking-wide text-ember-600 dark:text-ember-300">
                 <MapPin className="h-3.5 w-3.5" />
                 {campus.tag}
               </span>

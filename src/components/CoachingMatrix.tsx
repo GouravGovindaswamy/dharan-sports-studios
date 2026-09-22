@@ -5,6 +5,7 @@ import { auxiliaryCohorts, coachingPrograms, type CoachingProgram } from "../dat
 import { SectionHeading } from "./ui/SectionHeading";
 import { Badge } from "./ui/Badge";
 import { ArcheryIcon, CricketIcon, KarateIcon, SilambamIcon } from "./ui/SportIcons";
+import { Watermark } from "./ui/Watermark";
 
 const filters = ["All", "Cricket", "Silambam", "Karate", "Archery"] as const;
 type Filter = (typeof filters)[number];
@@ -17,7 +18,7 @@ const sportIcon: Record<CoachingProgram["id"], typeof CricketIcon> = {
 };
 
 const featuredSpan: Record<CoachingProgram["id"], string> = {
-  cricket: "sm:col-span-2 sm:row-span-2",
+  cricket: "md:col-span-3",
   silambam: "",
   karate: "",
   archery: "",
@@ -35,8 +36,9 @@ export function CoachingMatrix() {
   }, [filter]);
 
   return (
-    <section id="coaching" className="relative bg-app py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="coaching" className="relative overflow-hidden bg-app py-24 sm:py-32">
+      <Watermark text="MATRIX" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           index="04"
           eyebrow="Coaching Matrix"
@@ -71,7 +73,7 @@ export function CoachingMatrix() {
           })}
         </div>
 
-        <motion.div layout className="mt-8 grid auto-rows-[minmax(0,auto)] gap-6 sm:grid-cols-2">
+        <motion.div layout className="mt-8 grid auto-rows-[minmax(0,auto)] gap-6 md:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {visiblePrograms.map((program) => {
               const Icon = sportIcon[program.id];

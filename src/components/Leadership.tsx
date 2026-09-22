@@ -2,6 +2,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { BadgeCheck } from "lucide-react";
 import { leadership } from "../data/content";
 import { SectionHeading } from "./ui/SectionHeading";
+import { Watermark } from "./ui/Watermark";
 
 function initials(name: string) {
   if (name.toLowerCase().includes("founder")) return "CEO";
@@ -17,8 +18,9 @@ export function Leadership() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section id="leadership" className="relative bg-app py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="leadership" className="relative overflow-hidden bg-app py-24 sm:py-32">
+      <Watermark text="TEAM" align="left" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           index="02"
           eyebrow="Leadership"

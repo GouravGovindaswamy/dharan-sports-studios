@@ -4,6 +4,7 @@ import { ArrowRight, ChevronRight } from "lucide-react";
 import { brand, hero, stats, trustRibbon } from "../data/content";
 import { Counter } from "./ui/Counter";
 import { Marquee } from "./ui/Marquee";
+import { SportsMotif } from "./ui/SportsMotif";
 
 export function Hero() {
   const shouldReduceMotion = useReducedMotion();
@@ -34,7 +35,7 @@ export function Hero() {
         }}
       />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:px-8">
         <motion.div
           initial={shouldReduceMotion ? undefined : { opacity: 0, y: 30 }}
           animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
@@ -75,11 +76,20 @@ export function Hero() {
           </div>
         </motion.div>
 
+        <motion.div
+          initial={shouldReduceMotion ? undefined : { opacity: 0, scale: 0.9 }}
+          animate={shouldReduceMotion ? undefined : { opacity: 1, scale: 1 }}
+          transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
+          className="hidden lg:-mr-8 lg:block lg:translate-x-6"
+        >
+          <SportsMotif className="h-auto w-full max-w-md text-navy-600 dark:text-navy-300" />
+        </motion.div>
+
         <motion.dl
           initial={shouldReduceMotion ? undefined : { opacity: 0, y: 30 }}
           animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
-          className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-navy-900/10 dark:border-white/10 lg:grid-cols-4"
+          className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-navy-900/10 dark:border-white/10 lg:col-span-2 lg:grid-cols-4"
         >
           {stats.map((stat) => (
             <div key={stat.label} className="bg-raised px-5 py-7">

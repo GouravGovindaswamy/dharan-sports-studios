@@ -2,13 +2,15 @@ import { motion, useReducedMotion } from "framer-motion";
 import { pathway, pathwaySteps } from "../data/content";
 import { SectionHeading } from "./ui/SectionHeading";
 import { Badge } from "./ui/Badge";
+import { Watermark } from "./ui/Watermark";
 
 export function Pathway() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section id="pathways" className="relative bg-app py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="pathways" className="relative overflow-hidden bg-app py-24 sm:py-32">
+      <Watermark text="PATHWAY" align="left" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           index="03"
           eyebrow="Competitive Player Pathway"

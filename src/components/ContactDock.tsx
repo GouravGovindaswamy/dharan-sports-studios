@@ -42,12 +42,13 @@ export function ContactDock() {
   }
 
   const inputClasses =
-    "neu-pressed mt-2 w-full rounded-lg px-4 py-2.5 text-primary placeholder:text-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500";
+    "surface-pressed mt-2 w-full rounded-lg px-4 py-2.5 text-primary placeholder:text-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500";
 
   return (
     <section id="contact" className="relative bg-app py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
+          index="09"
           eyebrow="Application Dock"
           title="Start Your Trial"
           description="Reach out directly or send a fast registration — our team responds within one business day."
@@ -65,45 +66,39 @@ export function ContactDock() {
               href={whatsappHref(contact.whatsapp.number, contact.whatsapp.message)}
               target="_blank"
               rel="noopener noreferrer"
-              className="glass-card flex items-center gap-4 rounded-2xl border-sprout-500/30 p-5 transition-colors hover:border-sprout-500/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500"
+              className="surface flex items-center gap-4 rounded-2xl border-sprout-500/30 p-5 transition-colors hover:border-sprout-500/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500"
             >
-              <span className="neu-icon flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-sprout-500">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-sprout-500/10 text-sprout-500">
                 <MessageCircle className="h-6 w-6" />
               </span>
               <span>
-                <span className="block font-display text-lg font-bold text-primary">
-                  WhatsApp Us
-                </span>
+                <span className="block font-display text-lg font-semibold text-primary">WhatsApp Us</span>
                 <span className="block font-mono text-sm text-sprout-500">{contact.whatsapp.number}</span>
               </span>
             </a>
 
             <a
               href={`tel:${contact.call.replace(/[^\d+]/g, "")}`}
-              className="glass-card flex items-center gap-4 rounded-2xl p-5 transition-colors hover:border-navy-500/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500"
+              className="surface flex items-center gap-4 rounded-2xl p-5 transition-colors hover:border-navy-500/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500"
             >
-              <span className="neu-icon flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-navy-600 dark:text-navy-300">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-navy-500/10 text-navy-600 dark:text-navy-300">
                 <Phone className="h-6 w-6" />
               </span>
               <span>
-                <span className="block font-display text-lg font-bold text-primary">
-                  Call Direct
-                </span>
+                <span className="block font-display text-lg font-semibold text-primary">Call Direct</span>
                 <span className="block font-mono text-sm text-muted">{contact.call}</span>
               </span>
             </a>
 
             <a
               href={`mailto:${contact.email}`}
-              className="glass-card flex items-center gap-4 rounded-2xl p-5 transition-colors hover:border-navy-500/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500"
+              className="surface flex items-center gap-4 rounded-2xl p-5 transition-colors hover:border-navy-500/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500"
             >
-              <span className="neu-icon flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-navy-600 dark:text-navy-300">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-navy-500/10 text-navy-600 dark:text-navy-300">
                 <Mail className="h-6 w-6" />
               </span>
               <span>
-                <span className="block font-display text-lg font-bold text-primary">
-                  Email
-                </span>
+                <span className="block font-display text-lg font-semibold text-primary">Email</span>
                 <span className="block font-mono text-sm text-muted">{contact.email}</span>
               </span>
             </a>
@@ -118,7 +113,7 @@ export function ContactDock() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${s.label}: ${s.handle}`}
-                    className="neu-icon flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:text-ember-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500"
+                    className="surface flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:text-ember-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500"
                   >
                     <Icon className="h-5 w-5" />
                   </a>
@@ -133,16 +128,14 @@ export function ContactDock() {
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
             onSubmit={handleSubmit}
-            className="glass-card rounded-2xl p-6 sm:p-8"
+            className="surface rounded-2xl p-6 sm:p-8"
             noValidate
           >
-            <h3 className="font-display text-2xl font-bold text-primary">
-              Fast Registration
-            </h3>
+            <h3 className="font-display text-2xl font-semibold text-primary">Fast Registration</h3>
 
             <div className="mt-6 grid gap-5 sm:grid-cols-2">
               <div className="sm:col-span-2">
-                <label htmlFor={`${formId}-name`} className="block font-mono text-xs uppercase tracking-wide text-muted">
+                <label htmlFor={`${formId}-name`} className="font-label block text-xs uppercase tracking-wide text-muted">
                   Full Name
                 </label>
                 <input
@@ -157,15 +150,10 @@ export function ContactDock() {
               </div>
 
               <div>
-                <label htmlFor={`${formId}-age`} className="block font-mono text-xs uppercase tracking-wide text-muted">
+                <label htmlFor={`${formId}-age`} className="font-label block text-xs uppercase tracking-wide text-muted">
                   Age Group
                 </label>
-                <select
-                  id={`${formId}-age`}
-                  value={ageGroup}
-                  onChange={(e) => setAgeGroup(e.target.value)}
-                  className={inputClasses}
-                >
+                <select id={`${formId}-age`} value={ageGroup} onChange={(e) => setAgeGroup(e.target.value)} className={inputClasses}>
                   {registrationOptions.ageGroups.map((option) => (
                     <option key={option} value={option}>
                       {option}
@@ -175,15 +163,10 @@ export function ContactDock() {
               </div>
 
               <div>
-                <label htmlFor={`${formId}-sport`} className="block font-mono text-xs uppercase tracking-wide text-muted">
+                <label htmlFor={`${formId}-sport`} className="font-label block text-xs uppercase tracking-wide text-muted">
                   Preferred Sport
                 </label>
-                <select
-                  id={`${formId}-sport`}
-                  value={sport}
-                  onChange={(e) => setSport(e.target.value)}
-                  className={inputClasses}
-                >
+                <select id={`${formId}-sport`} value={sport} onChange={(e) => setSport(e.target.value)} className={inputClasses}>
                   {registrationOptions.sports.map((option) => (
                     <option key={option} value={option}>
                       {option}
@@ -193,15 +176,10 @@ export function ContactDock() {
               </div>
 
               <div className="sm:col-span-2">
-                <label htmlFor={`${formId}-campus`} className="block font-mono text-xs uppercase tracking-wide text-muted">
+                <label htmlFor={`${formId}-campus`} className="font-label block text-xs uppercase tracking-wide text-muted">
                   Preferred Campus
                 </label>
-                <select
-                  id={`${formId}-campus`}
-                  value={campus}
-                  onChange={(e) => setCampus(e.target.value)}
-                  className={inputClasses}
-                >
+                <select id={`${formId}-campus`} value={campus} onChange={(e) => setCampus(e.target.value)} className={inputClasses}>
                   {registrationOptions.campuses.map((option) => (
                     <option key={option} value={option}>
                       {option}
@@ -211,7 +189,7 @@ export function ContactDock() {
               </div>
 
               <div className="sm:col-span-2">
-                <label htmlFor={`${formId}-message`} className="block font-mono text-xs uppercase tracking-wide text-muted">
+                <label htmlFor={`${formId}-message`} className="font-label block text-xs uppercase tracking-wide text-muted">
                   Message (optional)
                 </label>
                 <textarea
@@ -227,7 +205,7 @@ export function ContactDock() {
 
             <button
               type="submit"
-              className="mt-6 w-full rounded-lg bg-gradient-to-r from-ember-500 to-ember-600 px-6 py-3.5 font-display text-base font-bold text-white shadow-orange-glow transition-transform hover:scale-[1.01] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-navy-950"
+              className="font-label mt-6 w-full rounded-lg bg-gradient-to-r from-ember-500 to-ember-600 px-6 py-3.5 text-base font-semibold text-white shadow-orange-glow transition-transform hover:scale-[1.01] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-navy-950"
             >
               Send via WhatsApp
             </button>
