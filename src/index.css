@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --bg-app: 250 248 242;
+  --bg-raised: 255 255 255;
+  --border-hairline: 8 10 26;
+  --border-hairline-alpha: 0.1;
+  --text-primary: 8 10 26;
+  --text-muted: 8 10 26;
+  --text-muted-alpha: 0.6;
+  --shadow-color: 8 10 26;
+}
+
+.dark {
+  color-scheme: dark;
+  --bg-app: 8 10 26;
+  --bg-raised: 15 19 41;
+  --border-hairline: 255 255 255;
+  --border-hairline-alpha: 0.1;
+  --text-primary: 247 245 238;
+  --text-muted: 220 224 240;
+  --text-muted-alpha: 0.6;
+  --shadow-color: 0 0 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+body {
+  background-color: rgb(var(--bg-app));
+  color: rgb(var(--text-primary));
+  font-family: "Inter", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+::selection {
+  background-color: rgb(221 122 46 / 0.85);
+  color: #fff;
+}
+
+* {
+  scrollbar-color: rgb(221 122 46 / 0.7) transparent;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(221 122 46 / 0.7);
+  border-radius: 999px;
+}
+
+@layer components {
+  .bg-app {
+    background-color: rgb(var(--bg-app));
+  }
+
+  .bg-raised {
+    background-color: rgb(var(--bg-raised));
+  }
+
+  .text-primary {
+    color: rgb(var(--text-primary));
+  }
+
+  .text-muted {
+    color: rgb(var(--text-muted) / var(--text-muted-alpha));
+  }
+
+  .hairline {
+    border-color: rgb(var(--border-hairline) / var(--border-hairline-alpha));
+  }
+
+  /* Flat, crisp elevated surface — the "glass" here is a thin frosted edge on
+     scroll-fixed chrome only, not smeared across every card. */
+  .surface {
+    background-color: rgb(var(--bg-raised));
+    border: 1px solid rgb(var(--border-hairline) / var(--border-hairline-alpha));
+    box-shadow: 0 1px 2px rgb(var(--shadow-color) / 0.04), 0 16px 40px -20px rgb(var(--shadow-color) / 0.35);
+  }
+
+  .surface-pressed {
+    background-color: rgb(var(--bg-raised));
+    border: 1px solid rgb(var(--border-hairline) / var(--border-hairline-alpha));
+    box-shadow: inset 0 1px 3px rgb(var(--shadow-color) / 0.12);
+  }
+
+  .glass-chrome {
+    background-color: rgb(var(--bg-app) / 0.72);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border-bottom: 1px solid rgb(var(--border-hairline) / var(--border-hairline-alpha));
+  }
+
+  .font-display {
+    font-family: "Fraunces", "Georgia", serif;
+    font-optical-sizing: auto;
+  }
+
+  .font-label {
+    font-family: "Space Grotesk", system-ui, sans-serif;
+  }
+}
+
+.text-gradient-brand {
+  background: linear-gradient(100deg, #dd7a2e 0%, #c9a15a 45%, #2a3570 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.dark .text-gradient-brand {
+  background: linear-gradient(100deg, #f0ac77 0%, #e4cb94 45%, #8c9ad4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Fixed film-grain overlay — the texture that keeps flat gradients from
+   reading as sterile/AI-generated. Uses feTurbulence, not an image asset. */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.dark .grain-overlay {
+  opacity: 0.06;
+}
+
+.bg-mesh {
+  background-image:
+    radial-gradient(circle at 10% 0%, rgb(221 122 46 / 0.14), transparent 40%),
+    radial-gradient(circle at 90% 10%, rgb(42 53 112 / 0.22), transparent 45%),
+    radial-gradient(circle at 50% 100%, rgb(201 161 90 / 0.1), transparent 45%);
+}
+
+.bg-noise-dots {
+  background-image: radial-gradient(circle at 1px 1px, rgb(var(--text-primary) / 0.08) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
