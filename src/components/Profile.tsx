@@ -3,6 +3,8 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Compass, HandCoins, HeartHandshake, Shield, ShieldCheck, Sparkles, Target } from "lucide-react";
 import { profile } from "../data/content";
 import { SectionHeading } from "./ui/SectionHeading";
+import { AmbientOrbs } from "./ui/AmbientOrbs";
+import { FloatingSportsIcons } from "./ui/FloatingSportsIcons";
 
 const tabs = [
   { id: "vision", label: "Vision", icon: Compass },
@@ -20,10 +22,11 @@ export function Profile() {
   const tablistId = useId();
 
   return (
-    <section id="profile" className="relative bg-app py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="profile" className="relative overflow-hidden bg-app py-24 sm:py-32">
+      <AmbientOrbs />
+      <FloatingSportsIcons variant="default" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          index="01"
           eyebrow="Profile & Mission"
           title="The Academy Behind The Athletes"
           description={profile.organizationalBacking}

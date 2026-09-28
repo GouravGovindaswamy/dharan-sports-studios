@@ -2,14 +2,18 @@ import { motion, useReducedMotion } from "framer-motion";
 import { partners, sponsorSpotlight } from "../data/content";
 import { SectionHeading } from "./ui/SectionHeading";
 import { Marquee } from "./ui/Marquee";
+import { AmbientOrbs } from "./ui/AmbientOrbs";
+import { FloatingSportsIcons } from "./ui/FloatingSportsIcons";
 
 export function Sponsors() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section className="relative bg-app py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeading index="07" eyebrow="Partners & Sponsors" title="Backed By Long-Term Partners" />
+    <section className="relative overflow-hidden bg-app py-24 sm:py-32">
+      <AmbientOrbs variant="compact" />
+      <FloatingSportsIcons variant="compact" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHeading eyebrow="Partners & Sponsors" title="Backed By Long-Term Partners" />
 
         <motion.div
           initial={shouldReduceMotion ? undefined : { opacity: 0, y: 24 }}

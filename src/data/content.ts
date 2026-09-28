@@ -1,12 +1,39 @@
 export const brand = {
   name: "Dharan Sports Studios",
   short: "DSS",
-  tagline: "Unleash Your Potential",
+  tagline: "Nurturing Skills",
+  supportingTagline: "Sports Today. Stronger Tomorrow.",
   unit: "OXFS",
   parent: "OX & FOX Sports and Charitable Trust",
   founded: 2006,
-  statusBadge: "TNCA & DISTRICT SELECTION TRIALS ACTIVE",
+  statusBadge: "ADMISSIONS OPEN — TNCA & DISTRICT SELECTION TRIALS ACTIVE",
 };
+
+export const masterPillars = [
+  "Fitness",
+  "Technique",
+  "Game Intelligence",
+  "Mindset",
+  "Character",
+  "Competition",
+];
+
+export const valuePillars = [
+  { title: "Physical Fitness", description: "Stronger, faster, more resilient bodies built through structured conditioning." },
+  { title: "Discipline & Focus", description: "Better concentration that carries over into studies and everyday life." },
+  { title: "Teamwork & Leadership", description: "Learning to play for the person next to you, not just yourself." },
+  { title: "Confidence & Resilience", description: "Handling wins, losses, and everything in between with composure." },
+  { title: "Character & Life Skills", description: "Respect, perseverance, and integrity — on the field and off it." },
+];
+
+export const commonProgramFeatures = [
+  { title: "Expert Coaching", description: "Experienced & certified coaches." },
+  { title: "Small Batches", description: "Focused attention for better learning." },
+  { title: "Structured Training", description: "Age-appropriate programs & drills." },
+  { title: "Progress Tracking", description: "Regular assessment & feedback." },
+  { title: "Competition Exposure", description: "Domestic & state-level opportunities." },
+  { title: "Safe & Supportive Environment", description: "Encouraging space for holistic development." },
+];
 
 export const navLinks = [
   { label: "Profile & Mission", href: "#profile" },
@@ -21,7 +48,7 @@ export const navLinks = [
 export const hero = {
   headline: "WHERE DISCIPLINE MEETS DOMINANCE.",
   subtitle:
-    "Nurturing multi-sport athletes across Cricket, Traditional Silambam, Karate, and Archery under the OX & FOX Sports Trust.",
+    "Sports for a healthier, happier & stronger tomorrow — nurturing multi-sport athletes across Cricket, Football, Silambam, Karate, and Archery under the OX & FOX Sports Trust.",
   ctas: {
     primary: { label: "Explore Coaching Batches", href: "#coaching" },
     secondary: { label: "View Academy Profile", href: "#profile" },
@@ -90,7 +117,7 @@ export const leadership: LeadershipMember[] = [
   {
     name: "Founder & CEO",
     title: "Founder & Chief Executive",
-    bio: "Leads academy strategy, curriculum design, and athlete development philosophy across all four disciplines.",
+    bio: "Leads academy strategy, curriculum design, and athlete development philosophy across all five disciplines.",
     credentials: [
       "ICC Level 1 Certified",
       "PG Diploma, Fitness & Nutrition",
@@ -119,7 +146,7 @@ export const pathwaySteps = [
   {
     step: "02",
     title: "Skill Nurturing Batches",
-    description: "Structured weekly coaching across Cricket, Silambam, Karate, and Archery builds technical and mental fundamentals.",
+    description: "Structured weekly coaching across Cricket, Football, Silambam, Karate, and Archery builds technical and mental fundamentals.",
   },
   {
     step: "03",
@@ -143,10 +170,17 @@ export const pathway = {
     "Nominal monthly fees for practice nets, with club-sponsored entries for district/state matches so athletes can focus purely on performance.",
 };
 
+export type SportAccent = "navy" | "ember" | "brass" | "crimson" | "sprout";
+
 export type CoachingProgram = {
-  id: "cricket" | "silambam" | "karate" | "archery";
+  id: "cricket" | "silambam" | "karate" | "archery" | "football";
   sport: string;
+  tagline: string;
+  badge: string;
+  accent: SportAccent;
   schedule: { label: string; time: string }[];
+  frequency: string;
+  venue: string;
   focus: string;
   focusAreas: string[];
 };
@@ -155,33 +189,80 @@ export const coachingPrograms: CoachingProgram[] = [
   {
     id: "cricket",
     sport: "Cricket Skill Nurturing",
+    tagline: "Bat · Bowl · Field · Grow",
+    badge: "Skills Today, Champions Tomorrow",
+    accent: "navy",
     schedule: [
       { label: "Morning · Tue, Wed & Thu", time: "6:00 AM – 7:00 AM" },
       { label: "Evening · Mon & Thu", time: "5:00 PM – 6:30 PM" },
     ],
+    frequency: "2 Days / Week",
+    venue: "Dharan Sports Studios Ground (Sankarapuram, Sithalapakkam)",
     focus: "Pitch analysis, net simulations, biomechanical shot selection.",
-    focusAreas: ["Attitude", "Strategy", "Fitness", "Bowling", "Batting", "Fielding"],
+    focusAreas: [
+      "Batting Techniques",
+      "Bowling Skills",
+      "Fielding Excellence",
+      "Match Strategy",
+      "Fitness & Agility",
+      "Mental Toughness",
+      "Practice Matches",
+    ],
+  },
+  {
+    id: "football",
+    sport: "Football Skill Nurturing",
+    tagline: "Play · Pass · Progress",
+    badge: "Discipline Today, Stronger Tomorrow",
+    accent: "ember",
+    schedule: [{ label: "Mon, Wed & Fri", time: "5:30 PM – 6:30 PM" }],
+    frequency: "3 Days / Week",
+    venue: "Dharan Sports Studios Ground (Sankarapuram, Sithalapakkam)",
+    focus: "Ball control, passing accuracy, tactical game understanding, and match fitness.",
+    focusAreas: [
+      "Ball Control & Dribbling",
+      "Passing & Shooting",
+      "Game Understanding",
+      "Speed & Stamina",
+      "Teamwork",
+      "Match Tournaments",
+    ],
   },
   {
     id: "silambam",
     sport: "Silambam Skill Nurturing",
+    tagline: "Tradition · Agility · Discipline",
+    badge: "Our Heritage, Our Strength",
+    accent: "brass",
     schedule: [{ label: "Tue & Wed", time: "6:30 PM – 7:30 PM" }],
+    frequency: "2 Days / Week",
+    venue: "Jones Sports Studios Range (Sankarapuram, Sithalapakkam)",
     focus: "Traditional Tamil martial arts, staff agility, footwork coordination, and defensive reflex conditioning.",
-    focusAreas: ["Fitness", "Technique", "Footwork", "Reflexes"],
+    focusAreas: ["Traditional Martial Art", "Agility & Coordination", "Footwork & Technique", "Discipline & Focus", "Cultural Pride"],
   },
   {
     id: "karate",
     sport: "Karate Skill Nurturing",
+    tagline: "Self-Defence · Discipline · Confidence",
+    badge: "Stronger Mind, Stronger Body",
+    accent: "crimson",
     schedule: [{ label: "Tue & Wed", time: "5:00 PM – 6:00 PM" }],
+    frequency: "2 Days / Week",
+    venue: "Jones Sports Studios Range (Sankarapuram, Sithalapakkam)",
     focus: "Kata, Kumite, posture, balance, and self-defense discipline. (Budokai)",
-    focusAreas: ["Discipline", "Self-Defense", "Kata", "Kumite"],
+    focusAreas: ["Self-Defence Skills", "Kata & Kumite", "Focus & Discipline", "Flexibility & Fitness", "Character Development"],
   },
   {
     id: "archery",
     sport: "Archery Skill Nurturing",
+    tagline: "Aim · Focus · Excel",
+    badge: "Aim Higher, Go Further",
+    accent: "sprout",
     schedule: [{ label: "Mon & Thu", time: "6:30 PM – 7:30 PM" }],
+    frequency: "2 Days / Week",
+    venue: "Jones Sports Studios Range (Sankarapuram, Sithalapakkam)",
     focus: "Mental concentration, upper-body stability, release mechanics, and target consistency.",
-    focusAreas: ["Precision", "Concentration", "Beginner → Advanced"],
+    focusAreas: ["Posture & Technique", "Aim & Mental Strength", "Score Improvement", "Tournament Prep", "Certified Coaches"],
   },
 ];
 
@@ -289,6 +370,6 @@ export const contact = {
 
 export const registrationOptions = {
   ageGroups: ["Under 10", "Under 14", "Under 19", "Adult (19+)"],
-  sports: ["Cricket", "Silambam", "Karate", "Archery", "Multiple"],
+  sports: ["Cricket", "Football", "Silambam", "Karate", "Archery", "Multiple"],
   campuses: ["Sithalapakkam", "Medavakkam"],
 };

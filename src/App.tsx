@@ -1,6 +1,7 @@
 import { ThemeProvider } from "./context/ThemeContext";
 import { Nav } from "./components/Nav";
 import { Hero } from "./components/Hero";
+import { ValuePillars } from "./components/ValuePillars";
 import { Profile } from "./components/Profile";
 import { Leadership } from "./components/Leadership";
 import { Pathway } from "./components/Pathway";
@@ -12,12 +13,16 @@ import { Testimonials } from "./components/Testimonials";
 import { ContactDock } from "./components/ContactDock";
 import { Footer } from "./components/Footer";
 import { Grain } from "./components/ui/Grain";
-import { SectionDivider } from "./components/ui/SectionDivider";
+import { ScrollProgress } from "./components/ui/ScrollProgress";
+import { BackToTop } from "./components/ui/BackToTop";
+import { FloatingWhatsApp } from "./components/ui/FloatingWhatsApp";
+import { SectionDotNav } from "./components/ui/SectionDotNav";
 
 function App() {
   return (
     <ThemeProvider>
       <div className="min-h-screen bg-app text-primary transition-colors duration-300">
+        <ScrollProgress />
         <Grain />
         <a
           href="#top"
@@ -26,28 +31,23 @@ function App() {
           Skip to content
         </a>
         <Nav />
+        <SectionDotNav />
         <main>
           <Hero />
-          <SectionDivider />
+          <ValuePillars />
           <Profile />
-          <SectionDivider />
           <Leadership />
-          <SectionDivider />
           <Pathway />
-          <SectionDivider />
           <CoachingMatrix />
-          <SectionDivider />
           <Locations />
-          <SectionDivider />
           <Services />
-          <SectionDivider />
           <Sponsors />
-          <SectionDivider />
           <Testimonials />
-          <SectionDivider />
           <ContactDock />
         </main>
         <Footer />
+        <BackToTop />
+        <FloatingWhatsApp />
       </div>
     </ThemeProvider>
   );

@@ -39,6 +39,16 @@ export function KarateIcon({ className = "h-6 w-6" }: IconProps) {
   );
 }
 
+export function FootballIcon({ className = "h-6 w-6" }: IconProps) {
+  return (
+    <svg viewBox="0 0 32 32" className={className} {...base}>
+      <circle cx="16" cy="16" r="11" />
+      <path d="M16 9 L20.5 12.3 L18.8 17.6 L13.2 17.6 L11.5 12.3 Z" strokeWidth={1.3} />
+      <path d="M16 9 L16 5.5 M20.5 12.3 L24.5 10.5 M18.8 17.6 L21 21.5 M13.2 17.6 L11 21.5 M11.5 12.3 L7.5 10.5" strokeWidth={1.1} opacity="0.7" />
+    </svg>
+  );
+}
+
 export function ArcheryIcon({ className = "h-6 w-6" }: IconProps) {
   return (
     <svg viewBox="0 0 32 32" className={className} {...base}>

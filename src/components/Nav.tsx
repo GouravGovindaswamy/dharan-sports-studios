@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { brand, navLinks } from "../data/content";
 import { ThemeToggle } from "./ui/ThemeToggle";
 import { Logo } from "./Logo";
+import { useScrollSpy } from "../hooks/useScrollSpy";
 
 export function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const sectionIds = useMemo(() => navLinks.map((link) => link.href.replace("#", "")), []);
+  const activeId = useScrollSpy(sectionIds);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -31,58 +34,73 @@ export function Nav() {
         scrolled ? "glass-chrome" : "border-b border-transparent"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2.5 sm:px-6 lg:px-8">
+      <div className="mx-auto grid max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-6 px-4 py-3.5 sm:px-6 lg:px-8">
         <a
           href="#top"
-          className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500"
+          className="min-w-max shrink-0 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500"
         >
           <Logo className="hidden sm:flex" />
           <Logo variant="mark" className="h-9 w-9 sm:hidden" />
         </a>
 
-        <nav className="hidden items-center gap-5 xl:flex" aria-label="Primary">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="font-label rounded-sm text-xs uppercase tracking-wide text-muted transition-colors hover:text-ember-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500"
-            >
-              {link.label}
-            </a>
-          ))}
+        <nav className="hidden flex-wrap items-center justify-center gap-x-5 gap-y-4 py-1.5 xl:flex" aria-label="Primary">
+          {navLinks.map((link) => {
+            const isActive = activeId === link.href.replace("#", "");
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                aria-current={isActive ? "true" : undefined}
+                className={`font-label relative whitespace-nowrap rounded-sm text-xs uppercase tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500 ${
+                  isActive ? "text-ember-500" : "text-muted hover:text-ember-500"
+                }`}
+              >
+                {link.label}
+                {isActive && (
+                  <motion.span
+                    layoutId="nav-active-indicator"
+                    className="absolute -bottom-1.5 left-0 right-0 h-[2px] rounded-full bg-ember-500"
+                    transition={{ type: "spring", stiffness: 400, damping: 32 }}
+                  />
+                )}
+              </a>
+            );
+          })}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
-          <div className="surface hidden items-center gap-2 rounded-full px-3 py-1.5 xl:flex" role="status">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-pulse-fast rounded-full bg-ember-500 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-ember-500" />
-            </span>
-            <span className="font-mono text-[10px] uppercase tracking-wide text-ember-600 dark:text-ember-300">
-              {brand.statusBadge}
-            </span>
+        <div className="flex min-w-max shrink-0 items-center justify-end gap-3">
+          <div className="hidden items-center gap-3 lg:flex">
+            <div className="surface hidden items-center gap-2 whitespace-nowrap rounded-full px-3 py-1.5 2xl:flex" role="status">
+              <span className="relative flex h-2 w-2 shrink-0">
+                <span className="absolute inline-flex h-full w-full animate-pulse-fast rounded-full bg-ember-500 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-ember-500" />
+              </span>
+              <span className="font-mono text-[10px] uppercase tracking-wide text-ember-600 dark:text-ember-300">
+                {brand.statusBadge}
+              </span>
+            </div>
+            <ThemeToggle />
+            <a
+              href="#contact"
+              className="font-label whitespace-nowrap rounded-md bg-gradient-to-r from-ember-500 to-ember-600 px-4 py-2 text-sm font-semibold text-white shadow-orange-glow transition-transform hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-navy-950"
+            >
+              Book Free Trial
+            </a>
           </div>
-          <ThemeToggle />
-          <a
-            href="#contact"
-            className="font-label rounded-md bg-gradient-to-r from-ember-500 to-ember-600 px-4 py-2 text-sm font-semibold text-white shadow-orange-glow transition-transform hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-navy-950"
-          >
-            Book Free Trial
-          </a>
-        </div>
 
-        <div className="flex items-center gap-2 lg:hidden">
-          <ThemeToggle />
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-expanded={open}
-            aria-controls="mobile-nav"
-            aria-label={open ? "Close menu" : "Open menu"}
-            className="surface rounded-md p-2 text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500"
-          >
-            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          <div className="flex items-center gap-2 lg:hidden">
+            <ThemeToggle />
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-expanded={open}
+              aria-controls="mobile-nav"
+              aria-label={open ? "Close menu" : "Open menu"}
+              className="surface rounded-md p-2 text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500"
+            >
+              {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
       </div>
 

@@ -30,6 +30,14 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Sections carry continuous ambient animations (orbs, floating icons).
+   content-visibility skips layout/paint for them while off-screen so those
+   loops stay cheap instead of running full-cost for the whole scroll depth. */
+main > section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -88,10 +96,6 @@ body {
 
   .text-muted {
     color: rgb(var(--text-muted) / var(--text-muted-alpha));
-  }
-
-  .hairline {
-    border-color: rgb(var(--border-hairline) / var(--border-hairline-alpha));
   }
 
   /* Flat, crisp elevated surface — the "glass" here is a thin frosted edge on
@@ -162,17 +166,3 @@ body {
     radial-gradient(circle at 50% 100%, rgb(201 161 90 / 0.1), transparent 45%);
 }
 
-.bg-noise-dots {
-  background-image: radial-gradient(circle at 1px 1px, rgb(var(--text-primary) / 0.08) 1px, transparent 0);
-  background-size: 22px 22px;
-}
-
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee 32s linear infinite;
-}
-
-.marquee-track:hover {
-  animation-play-state: paused;
-}

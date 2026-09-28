@@ -9,8 +9,8 @@ export function Footer() {
           <div>
             <Logo />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
-              {brand.tagline} — nurturing multi-sport athletes across Cricket, Silambam, Karate, and
-              Archery under the {brand.parent}.
+              {brand.supportingTagline} Nurturing multi-sport athletes across Cricket, Football, Silambam,
+              Karate, and Archery under the {brand.parent}.
             </p>
           </div>
 
@@ -64,11 +64,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex justify-center rounded-2xl bg-white p-5 shadow-crisp sm:justify-start">
-          <img src="/brand-lockup.png" alt="Dharan Sports Studios — official crest" className="h-14 w-auto object-contain sm:h-16" />
-        </div>
-
-        <div className="mt-8 flex flex-col gap-3 border-t border-navy-900/10 pt-6 dark:border-white/10 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-3 border-t border-navy-900/10 pt-6 dark:border-white/10 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-mono text-xs text-muted/70">
             © {new Date().getFullYear()} {brand.name}. All rights reserved.
           </p>

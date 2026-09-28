@@ -1,8 +1,12 @@
 import { useId, useState, type FormEvent } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { Facebook, Instagram, Mail, MessageCircle, Phone, Youtube } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { Facebook, Instagram, Mail, MessageCircle, Phone, Trophy, Youtube } from "lucide-react";
 import { contact, registrationOptions } from "../data/content";
 import { SectionHeading } from "./ui/SectionHeading";
+import { AmbientOrbs } from "./ui/AmbientOrbs";
+import { FloatingSportsIcons } from "./ui/FloatingSportsIcons";
+import { SportsBurst } from "./ui/SportsBurst";
+import { buildRegistrationMessage, whatsappHref } from "../lib/whatsapp";
 
 const socialIcons = {
   YouTube: Youtube,
@@ -10,15 +14,11 @@ const socialIcons = {
   Facebook: Facebook,
 };
 
-function whatsappHref(number: string, message: string) {
-  const digits = number.replace(/[^\d]/g, "");
-  return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
-}
-
 export function ContactDock() {
   const shouldReduceMotion = useReducedMotion();
   const formId = useId();
   const [submitted, setSubmitted] = useState(false);
+  const [burstTrigger, setBurstTrigger] = useState(0);
 
   const [fullName, setFullName] = useState("");
   const [ageGroup, setAgeGroup] = useState(registrationOptions.ageGroups[0]);
@@ -28,27 +28,21 @@ export function ContactDock() {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const lines = [
-      "Hi DSS, I would like to enquire about coaching trials.",
-      `Name: ${fullName}`,
-      `Age Group: ${ageGroup}`,
-      `Preferred Sport: ${sport}`,
-      `Preferred Campus: ${campus}`,
-      message ? `Message: ${message}` : null,
-    ].filter(Boolean);
-
-    window.open(whatsappHref(contact.whatsapp.number, lines.join("\n")), "_blank", "noopener,noreferrer");
+    const text = buildRegistrationMessage({ fullName, ageGroup, sport, campus, message });
+    window.open(whatsappHref(contact.whatsapp.number, text), "_blank", "noopener,noreferrer");
     setSubmitted(true);
+    setBurstTrigger((n) => n + 1);
   }
 
   const inputClasses =
     "surface-pressed mt-2 w-full rounded-lg px-4 py-2.5 text-primary placeholder:text-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500";
 
   return (
-    <section id="contact" className="relative bg-app py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="relative overflow-hidden bg-app py-24 sm:py-32">
+      <AmbientOrbs />
+      <FloatingSportsIcons variant="default" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          index="09"
           eyebrow="Application Dock"
           title="Start Your Trial"
           description="Reach out directly or send a fast registration — our team responds within one business day."
@@ -203,16 +197,41 @@ export function ContactDock() {
               </div>
             </div>
 
-            <button
-              type="submit"
-              className="font-label mt-6 w-full rounded-lg bg-gradient-to-r from-ember-500 to-ember-600 px-6 py-3.5 text-base font-semibold text-white shadow-orange-glow transition-transform hover:scale-[1.01] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-navy-950"
-            >
-              Send via WhatsApp
-            </button>
+            <div className="relative mt-6">
+              <button
+                type="submit"
+                className="font-label w-full rounded-lg bg-gradient-to-r from-ember-500 to-ember-600 px-6 py-3.5 text-base font-semibold text-white shadow-orange-glow transition-transform hover:scale-[1.01] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-navy-950"
+              >
+                Send via WhatsApp
+              </button>
+              <SportsBurst trigger={burstTrigger} />
+            </div>
 
-            <p role="status" aria-live="polite" className="mt-3 min-h-[1.25rem] text-sm text-sprout-500">
-              {submitted ? "Opening WhatsApp with your details filled in…" : ""}
-            </p>
+            <div role="status" aria-live="polite" className="mt-3 min-h-[2.5rem]">
+              <AnimatePresence>
+                {submitted && (
+                  <motion.div
+                    initial={shouldReduceMotion ? undefined : { opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={shouldReduceMotion ? undefined : { opacity: 0, scale: 0.95 }}
+                    transition={shouldReduceMotion ? { duration: 0 } : { type: "spring", stiffness: 300, damping: 20 }}
+                    className="flex items-center gap-2.5 rounded-xl border border-sprout-500/30 bg-sprout-500/10 px-4 py-2.5"
+                  >
+                    <motion.span
+                      initial={shouldReduceMotion ? undefined : { rotate: -20, scale: 0.5 }}
+                      animate={{ rotate: 0, scale: 1 }}
+                      transition={{ delay: 0.15, type: "spring", stiffness: 350, damping: 12 }}
+                      className="text-brass-500"
+                    >
+                      <Trophy className="h-5 w-5" />
+                    </motion.span>
+                    <span className="text-sm font-semibold text-sprout-600 dark:text-sprout-400">
+                      Trial Request Sent — we'll be in touch within one business day!
+                    </span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </motion.form>
         </div>
       </div>

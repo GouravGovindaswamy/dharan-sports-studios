@@ -3,13 +3,15 @@ import { testimonials } from "../data/content";
 import { SectionHeading } from "./ui/SectionHeading";
 import { Marquee } from "./ui/Marquee";
 import { Watermark } from "./ui/Watermark";
+import { AmbientOrbs } from "./ui/AmbientOrbs";
 
 export function Testimonials() {
   return (
     <section className="relative overflow-hidden bg-app py-24 sm:py-32">
+      <AmbientOrbs variant="compact" />
       <Watermark text="PROOF" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeading index="08" eyebrow="Social Proof" title="Voices From The Academy" align="center" />
+        <SectionHeading eyebrow="Social Proof" title="Voices From The Academy" align="center" />
       </div>
 
       <div className="relative mt-12">

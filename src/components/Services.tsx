@@ -2,6 +2,9 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Activity, Radio, Rows3 } from "lucide-react";
 import { facilityRentals, services, streamingTiers } from "../data/content";
 import { SectionHeading } from "./ui/SectionHeading";
+import { AmbientOrbs } from "./ui/AmbientOrbs";
+import { Watermark } from "./ui/Watermark";
+import { FloatingSportsIcons } from "./ui/FloatingSportsIcons";
 
 const icons = [Activity, Radio, Rows3];
 
@@ -9,10 +12,12 @@ export function Services() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section id="services" className="relative bg-app py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="services" className="relative overflow-hidden bg-app py-24 sm:py-32">
+      <AmbientOrbs variant="compact" />
+      <FloatingSportsIcons variant="compact" />
+      <Watermark text="SERVICES" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          index="06"
           eyebrow="Services & Infrastructure"
           title="Sports Technology & Ground Services"
           description="Beyond coaching — the infrastructure and technical services that power local competition."
@@ -28,11 +33,16 @@ export function Services() {
                 whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.1 }}
+                whileHover={shouldReduceMotion ? undefined : { y: -6 }}
                 className="surface rounded-2xl p-6 transition-colors hover:border-navy-500/40 sm:p-7"
               >
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-navy-500/10 text-navy-600 dark:text-navy-300">
+                <motion.span
+                  whileHover={shouldReduceMotion ? undefined : { rotate: 12, scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 12 }}
+                  className="flex h-11 w-11 items-center justify-center rounded-xl bg-navy-500/10 text-navy-600 dark:text-navy-300"
+                >
                   <Icon className="h-5 w-5" />
-                </span>
+                </motion.span>
                 <h3 className="mt-5 font-display text-xl font-semibold text-primary">{service.title}</h3>
                 <p className="mt-2.5 text-sm leading-relaxed text-muted">{service.description}</p>
               </motion.div>

@@ -46,6 +46,14 @@ export default {
           500: "#4C9A5B",
           600: "#3B7C48",
         },
+        crimson: {
+          50: "#FDECEC",
+          300: "#E68080",
+          400: "#DC5555",
+          500: "#C62E2E",
+          600: "#A82323",
+          700: "#821A1A",
+        },
       },
       fontFamily: {
         display: ["'Fraunces'", "'Georgia'", "serif"],
